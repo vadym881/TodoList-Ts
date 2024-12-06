@@ -1,27 +1,45 @@
 import { Lesson } from "./lesson.ts";
 
+type eventType = { lessonTitle: string; dayTimeArray: string[] };
+
 export class School {
-  lessons: Lesson[];
-  constructor() {
-    this.lessons = [];
+  events: eventType[] = [];
+  constructor() {}
+
+  findEventByLessonTitle(title: string): eventType | undefined {
+    return this.events.find((event) => event.lessonTitle === title);
   }
 
-  findLessonByTitle(title: string): Lesson | undefined { 
-    return this.lessons.find(lesson => lesson.getTitle() === title )
-  }
-
-  lessonTitleExists(title: string): boolean {    
-    const foundItem = this.findLessonByTitle(title)
-    return foundItem instanceof Lesson
+  eventWithLessonTitleExists(title: string): boolean {
+    const foundItem = this.findEventByLessonTitle(title);
+    return foundItem !== undefined;
   }
 
   addLesson(lesson: Lesson): void {
-    if (!this.lessonTitleExists(lesson.getTitle())) {
-        this.lessons.push(lesson)
-    } else {
-        const foundItem = this.lessons.find(l => l.getTitle() === lesson.getTitle()) 
-        foundItem?.days.push(lesson.days[0])
+    if (!this.eventWithLessonTitleExists(lesson.getTitle())) {
+      const event: eventType = {
+        lessonTitle: lesson.getTitle(),
+        dayTimeArray: [`${lesson.day} * ${lesson.startTime}`],
+      };
+      this.events.push(event);
+      return;
     }
-     
+
+    const foundEvent = this.findEventByLessonTitle(lesson.getTitle());
+    const eventTime = `${lesson.day} * ${lesson.startTime}`;
+    if (foundEvent?.dayTimeArray.includes(eventTime)) {
+      console.log("Impossible to add lesson with existing time");
+      return;
+    }
+    foundEvent?.dayTimeArray.push(eventTime);
+  }
+
+  printSchedule(): void {
+    for (const event of this.events) {
+      console.log(event.lessonTitle);
+      for (const el of event.dayTimeArray) {
+        console.log(el);
+      }
+    }
   }
 }
