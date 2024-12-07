@@ -10,9 +10,10 @@ taskAsync.setFinishDate(7);
 
 const school = new School();
 const math = new Lesson("Math", "TUE", "09:50");
-school.addLesson(math);
+school.addEventLesson(math);
 
 const math2 = new Lesson("Math", "WED", "08:55");
-school.addLesson(math2);
-school.addLesson(math);
+school.addEventLesson(math2);
+school.removeEventLesson(math2)
+school.removeEventLesson(math2)
 school.printSchedule();
