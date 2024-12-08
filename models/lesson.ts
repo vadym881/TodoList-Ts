@@ -1,5 +1,6 @@
 export type WeekdayType = "MON" | "TUE" | "WED" | "THU" | "FRI" | "SAT" | "SUN";
 export type HourMinuteType =
+    "08:00"
   | "08:55"
   | "09:50"
   | "10:45"

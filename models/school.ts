@@ -40,7 +40,7 @@ export class School {
       console.log("Impossible to delete unexisting lesson");
       return;
     }
-    
+
     const foundEvent = this.findEventByLessonTitle(lesson.getTitle());
     const eventTime = `${lesson.day} * ${lesson.startTime}`;
     if (!foundEvent?.dayTimeArray.includes(eventTime)) {
@@ -48,8 +48,23 @@ export class School {
       return;
     }
 
-    const index = foundEvent.dayTimeArray.indexOf(eventTime)
-    foundEvent.dayTimeArray.splice(index, 1)
+    const index = foundEvent.dayTimeArray.indexOf(eventTime);
+    foundEvent.dayTimeArray.splice(index, 1);
+  }
+
+  getLessonsRateByCount(descending = true) {
+    type CountRateType = { title: string; count: number };
+    const arr: CountRateType[] = this.events.map((a) => {
+      const item: CountRateType = {
+        title: a.lessonTitle,
+        count: a.dayTimeArray.length,
+      };
+      return item;
+    });
+    descending
+      ? arr.sort((a, b) => b.count - a.count)
+      : arr.sort((a, b) => a.count - b.count);
+    return arr
   }
 
   printSchedule(): void {
@@ -61,6 +76,7 @@ export class School {
       console.log(event.lessonTitle);
       for (const el of event.dayTimeArray) {
         console.log(el);
+        console.log("\n");
       }
     }
   }
