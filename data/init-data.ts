@@ -17,8 +17,10 @@ export const initLessonsArray: Lesson[] = [
   new Lesson("Algebra", "TUE", "13:55"),
   new Lesson("German", "TUE", "14:50"),
 
-  new Lesson("Art/Basics of health", "WED", "08:00"),
-  new Lesson("Ukrainian history/Geography", "WED", "08:55"),
+  new Lesson("Art", "WED", "08:00", 1),
+  new Lesson("Basics of health", "WED", "08:00", 2),
+  new Lesson("Ukrainian history", "WED", "08:55", 1),
+  new Lesson("Geography", "WED", "08:55", 2),
   new Lesson("Chemistry", "WED", "09:50"),
   new Lesson("World history", "WED", "10:45"),
   new Lesson("Geometry", "WED", "12:00"),

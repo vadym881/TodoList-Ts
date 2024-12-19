@@ -13,4 +13,4 @@ for (const lesson of initLessonsArray) {
     school.addEventLesson(lesson)
 }
 console.log(school.getLessonsRateByCount())
-// school.printSchedule();
+//school.printSchedule();

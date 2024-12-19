@@ -17,16 +17,22 @@ export class School {
 
   addEventLesson(lesson: Lesson): void {
     if (!this.eventWithLessonTitleExists(lesson.getTitle())) {
+      let dayTimeValue = `${lesson.day} * ${lesson.startTime}`;
+      if (lesson.week) dayTimeValue = `${lesson.week} * ${dayTimeValue}`;
+
       const event: eventType = {
         lessonTitle: lesson.getTitle(),
-        dayTimeArray: [`${lesson.day} * ${lesson.startTime}`],
+        dayTimeArray: [dayTimeValue],
       };
       this.events.push(event);
       return;
     }
 
     const foundEvent = this.findEventByLessonTitle(lesson.getTitle());
-    const eventTime = `${lesson.day} * ${lesson.startTime}`;
+
+    let eventTime = `${lesson.day} * ${lesson.startTime}`;
+    if (lesson.week) eventTime = `${lesson.week} * ${eventTime}`;
+
     if (foundEvent?.dayTimeArray.includes(eventTime)) {
       console.log("Impossible to add lesson with existing time");
       return;
@@ -64,7 +70,7 @@ export class School {
     descending
       ? arr.sort((a, b) => b.count - a.count)
       : arr.sort((a, b) => a.count - b.count);
-    return arr
+    return arr;
   }
 
   printSchedule(): void {
