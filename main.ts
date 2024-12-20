@@ -10,7 +10,10 @@ import { Task } from "./models/task.ts";
 
 const school = new School();
 for (const lesson of initLessonsArray) {
-    school.addEventLesson(lesson)
+  school.addEventLesson(lesson);
 }
-console.log(school.getLessonsRateByCount())
-//school.printSchedule();
+
+// console.log(school.events)
+
+// console.log(school.getLessonsRateByCount())
+school.printSchedule();
