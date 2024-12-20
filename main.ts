@@ -17,3 +17,6 @@ for (const lesson of initLessonsArray) {
 
 // console.log(school.getLessonsRateByCount())
 school.printSchedule();
+
+// console.log(school.getLessonsRateByCount())
+console.log(school.getOverallLessonsAmount())

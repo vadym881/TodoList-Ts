@@ -64,7 +64,7 @@ export class School {
     foundEvent.dayTimeArray.splice(index, 1);
   }
 
-  getLessonsRateByCount(descending = true) {
+  getLessonsRateByCount(descending = true): { title: string; count: number }[] {
     type CountRateType = { title: string; count: number };
     const arr: CountRateType[] = this.events.map((a) => {
       const blinkWeeksCount = a.dayTimeArray.filter(
@@ -135,5 +135,14 @@ export class School {
         console.log("\n");
       }
     }
+  }
+
+  getOverallLessonsAmount(): number {
+    let count = 0;
+    const lessonsRateByCount = this.getLessonsRateByCount();
+    for (const lesson of lessonsRateByCount) {
+      count += lesson.count;
+    }
+    return count;
   }
 }
