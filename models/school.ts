@@ -22,9 +22,15 @@ export class School {
   }
 
   addEventLesson(ls: Lesson): void {
-    if (!this.eventWithLessonTitleExists(ls.getTitle())) {
-      const dayTimeValue = this.createDayTimeValue(ls);
+    const dayTimeValue = this.createDayTimeValue(ls);
 
+    for (const event of this.events) {
+      if (event.dayTimeArray.includes(dayTimeValue)) {
+        return;
+      }
+    }
+
+    if (!this.eventWithLessonTitleExists(ls.getTitle())) {
       const event: eventType = {
         lessonTitle: "",
         dayTimeArray: [],
@@ -36,13 +42,6 @@ export class School {
     }
 
     const foundEvent = this.findEventByLessonTitle(ls.getTitle());
-
-    const dayTimeValue = this.createDayTimeValue(ls);
-
-    if (foundEvent?.dayTimeArray.includes(dayTimeValue)) {
-      console.log("Impossible to add lesson with existing time");
-      return;
-    }
 
     foundEvent?.dayTimeArray.push(dayTimeValue);
   }
